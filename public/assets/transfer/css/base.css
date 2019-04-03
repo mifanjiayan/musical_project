@@ -1,0 +1,114 @@
+@CHARSET "UTF-8";
+body,ul,ol,li,dl,dt,dd,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;}
+html{height: 100%;}
+body{font-family:"Microsoft YaHei"; height: 100%; font-size:.12rem;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+ul,ol{list-style-type:none;}
+select,input,img,select{vertical-align:middle;}
+a {text-decoration: none;}
+img {width: 100%; display: block; vertical-align: middle;}
+em {font-style: normal;}
+/*去除谷歌下的黄色输入框与背景*/
+*:focus { outline: none; }
+.nohighlight:focus { outline:none;}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {width: 0px;height: 0px;}
+::-webkit-scrollbar-thumb {border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;background-color: #c3c3c3;}
+::-webkit-scrollbar-track {background-color: transparent;}
+
+.bottom_p{
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   background-color:#efedf4;
+   width: 100%;
+   height: 0.8rem;/* 60px */
+   line-height: 0.8rem;
+   font-size: 0.277778rem;/*30px*/
+   color: #555555;
+   text-align: center;
+}
+
+/* 使一个控件垂直水平居中的方法 */
+.center_e{
+   width: 1.777778rem;/* 128px */
+   height: 1.777778rem;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate3d(-50%,-50%,0);
+   -ms-transform: translate3d(-50%,-50%,0);
+   -moz-transform: translate3d(-50%,-50%,0);
+   -webkit-transform: translate3d(-50%,-50%,0);
+   -o-transform: translate3d(-50%,-50%,0);
+}
+
+.fixedDiv {
+    position: fixed;
+    right: 0.266667rem;/* 20px */
+    bottom: 1.066667rem;/* 80px */
+    cursor: pointer;
+    z-index: 9999;
+}
+
+.fixedDiv img {
+    display: block;
+    width: 0.666667rem;/* 50px */
+}
+
+#loading_div img {
+    width: 0.666667rem;
+    /* 50px */
+    height: 0.666667rem;
+    /* 50px */
+    margin: auto;
+    margin-top: 0.266667rem;
+    /* 20px */
+    margin-bottom: 1.066667rem;
+    /* 80px */
+}
+.no_more{
+    height: 0.666667rem;
+    /* 50px */
+    margin-top: 0.266667rem;
+    /* 20px */
+    margin-bottom: 1.066667rem;
+    /* 80px */
+    text-align: center;
+}
+
+@media screen and (min-width: 320px) {
+    html {
+        font-size: 100px;
+    }
+}
+
+@media screen and (min-width: 360px) {
+    html {
+        font-size: 112.5px;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    html {
+        font-size: 125px;
+    }
+}
+
+@media screen and (min-width: 440px) {
+    html {
+        font-size: 137.5px;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    html {
+        font-size: 150px;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    html {
+        font-size: 200px;
+    }
+}

@@ -1,0 +1,128 @@
+html{
+    height: 100%;
+}
+body{
+    height: auto;
+    min-height: 100%;
+    background-color: #f7f7f7;
+}
+.st{
+    height: 0.933333rem;
+    /* 70px */
+}
+.out_div{
+    position: relative;
+    width: 80%;
+    max-width: 8.56rem;
+    /* 642px */
+    margin: auto;
+    padding-top: 0.8rem;
+    /* 60px */
+    background-color: #ffffff;
+}
+.left_p{
+    position: absolute;
+    bottom: 1.733333rem;
+    /* 130px */
+    left: -0.24rem;
+    /* 18px */
+    width: 0.48rem;
+    /* 36px */
+    height: 0.48rem;
+    border-radius: 50%;
+    background: #f7f7f7;
+}
+.right_p {
+    position: absolute;
+    bottom: 1.733333rem;
+    /* 130px */
+    right: -0.24rem;
+    /* 18px */
+    width: 0.48rem;
+    /* 36px */
+    height: 0.48rem;
+    border-radius: 50%;
+    background: #f7f7f7;
+}
+
+.p_one {
+    height: 0.8rem;
+    /* 60px */
+    line-height: 0.8rem;
+    text-align: center;
+    color: #333333;
+    font-size: 0.533333rem;
+    /* 40px */
+}
+.pay_money{
+    color: #cc0000;
+    font-size: 0.666667rem;
+    /* 50px */
+}
+.p_two{
+    margin-top: 0.266667rem;
+    /* 20px */
+    margin-bottom: 0.4rem;
+    /* 30px */
+    font-size: 0.4rem;
+    /* 30px */
+    color: #b2b2b2;
+    text-align: center;
+}
+.qr_code_img{
+    width: 80%;
+    margin: auto;
+}
+.open_ali_pay{
+    display: block;
+    width: 80%;
+    height: 1.066667rem;
+    /*80px*/
+    background-color: #31b0d5;
+    color: #ffffff;
+    font-size: 0.373333rem;
+    /*28px*/
+    border: 0;
+    border-radius: 0.133333rem;
+    /*10px*/
+    margin: auto;
+}
+.sign_img{
+    width: 2.56rem;
+    /* 192px */
+    margin: auto;
+    margin-top: 0.333333rem;
+    /* 25px */
+}
+.time_p{
+    margin-top: 0.346667rem;
+    /* 26px */
+    font-size: 0.533333rem;
+    /* 40px */
+    color: #999999;
+    text-align: center;
+}
+.time_span{
+    color: #ff7e00;
+}
+.last_p{
+    height: 1.946667rem;
+    /* 146px */
+    line-height: 1.946667rem;
+    margin-top: 0.4rem;
+    /* 30px */
+    border-top: 0.013333rem dashed #dddddd;
+    font-size: 0.533333rem;
+    /* 40px */
+    color: #666666;
+    text-align: center;
+}
+
+.dialog_div{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+}
