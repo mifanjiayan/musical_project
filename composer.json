@@ -27,7 +27,6 @@
         "endroid/qr-code": "^3.5",
         "fzaninotto/faker": "^1.8",
         "workerman/mysql": "^1.0",
-        "phpoffice/phpspreadsheet": "^1.6",
         "ext-bcmath": "*",
         "ext-json": "*"
     },
@@ -41,5 +40,11 @@
     },
     "config": {
         "preferred-install": "dist"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.laravel-china.org"
+        }
     }
 }
