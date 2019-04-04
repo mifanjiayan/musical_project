@@ -11,7 +11,7 @@
 
 // 应用公共文件
 
-use think\facade\Config;
+
 use think\facade\Log;
 
 /**
@@ -481,20 +481,7 @@ function invitationMake()
     return substr(base_convert(md5(uniqid(md5(microtime(true)), true)), 16, 10), 0, 6);
 }
 
-/**
- * 验证权限
- * @param string $role
- * @return bool
- */
-function check_role($role = '')
-{
-    $admin_info = get_admin_info();
-    if ($admin_info['id'] == 1) {
-        return true;
-    }
-    $auth = new \app\common\library\Auth();
-    return $auth->check($role, $admin_info['id']);
-}
+
 
 /**
  * 获取后台用户登录信息
@@ -527,36 +514,6 @@ function responseJson($success, $code = 0, $message = '', $data = [])
     exit();
 }
 
-/**
- * 添加操作日志
- * @param string $remark 备注
- * @param string $type admin 后台  shop 商户
- */
-function add_operateLogs($remark, $type = 'admin')
-{
-    if ($type == 'admin') {
-        $user = Session::get('admin_info');
-    } elseif ($type == 'shop') {
-        $user = Session::get('shop_info');
-    }
-
-    $data = [
-        'uid' => $user['id'],
-        'remark' => $remark,
-        'ip' => request()->ip(),
-        'created_at' => date('Y-m-d H:i:s', time()),
-        'type' => 1,
-        'content' => json_encode(request()->param())
-    ];
-
-    if ($type == 'admin') {
-        $data['from'] = 'admin';
-    } else {
-        $data['from'] = 'shop';
-    }
-
-    \app\common\model\AdminOperateLogs::create($data);
-}
 
 
 /**
@@ -606,58 +563,6 @@ function send_code($phone_num, $code)
     }
 }
 
-
-/**
- * 后台json输出
- * @param $success
- * @param $message
- * @param array $data
- * @param int $code
- * @param int $http_code
- * @return \think\response\Json
- */
-function rJson($success, $message, $data = [], $code = 0, $http_code = 200)
-{
-    if (empty($message)) {
-        $message = '未知信息';
-    }
-    if (empty($data)) {
-        $data = (object)[];
-    }
-
-    $result = [
-        'success' => $success,
-        'message' => $message,
-        'code' => $code,
-        'data' => $data,
-    ];
-
-    Log::debug('前台输出：' . json_encode($result));
-
-    return json($result, $http_code);
-}
-
-/**
- * 获取会员等级
- * @param int $point 会员分数
- * @return mixed
- */
-function get_member_level($point)
-{
-    $level = [
-        0 => ['max' => 1000, 'min' => 0, 'name' => '普通会员', 'level' => 1],
-        1 => ['max' => 10000, 'min' => 1000, 'name' => '银卡会员', 'level' => 2],
-        2 => ['max' => 20000, 'min' => 10000, 'name' => '黄金会员', 'level' => 3],
-        3 => ['max' => 50000, 'min' => 20000, 'name' => '铂金会员', 'level' => 4],
-        4 => ['max' => 100000, 'min' => 50000, 'name' => '钻石会员', 'level' => 5]
-    ];
-    foreach ($level as $value) {
-        if (($point >= $value['min']) && ($point < $value['max'])) {
-            return $value;
-        }
-    }
-}
-
 /**
  * 返回json数据
  * @param int $code
@@ -681,13 +586,6 @@ function jsonResponse($code = -1, $msg = '', $data = [], $http_code = 200, $is_o
     return json($result, $http_code);
 }
 
-/**
- * 获取银行卡信息
- */
-function get_bankcard_info($card)
-{
-    return BankCard::info($card);
-}
 
 /**
  * 自动生成订单号  生成订单15位
@@ -705,25 +603,4 @@ function get_auto_new_order($ord = 0)
     return $str;
 }
 
-/**
- * @desc: 操作日志
- * @author: Tinywan(ShaoBo Wan)
- * @time: 2019/4/2 17:04
- * @param null $desc
- */
-function add_operation_log($desc = null)
-{
-    $request = \think\facade\Request::instance();
-    \app\common\model\Logs::create([
-        'account' => get_admin_info()['username'],
-        'module' => $request->module(),
-        'controller' => $request->controller(),
-        'action' => $request->action(),
-        'event_type' => '普通',
-        'url' => $request->url(),
-        'ipaddr' => $request->ip(),
-        'addtime' => $request->time(),
-        'query_string' => json_encode($request->param()),
-        'desc' => $desc,
-    ]);
-}
+

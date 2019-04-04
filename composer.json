@@ -18,6 +18,7 @@
     "require": {
         "php": ">=5.6.0",
         "topthink/framework": "5.1.*",
+        "workerman/gateway-worker": "^3.0",
         "topthink/think-captcha": "^2.0",
         "topthink/think-queue": "^2.0",
         "phpmailer/phpmailer": "^6.0",

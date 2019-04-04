@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>{$Think.config.app.system.web_name}控制台</title>
+    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico" type="image/x-icon">
+    <link href="__admin__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__admin__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="__admin__/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="__admin__/css/login.css?v=4.1.0" rel="stylesheet">
+    <script src="__admin__/js/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <script>
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
+    <style type="text/css">
+        body.signin input {
+            color: #0a0c0d;
+        }
+    </style>
+</head>
+
+<body class="signin">
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-7">
+
+        </div>
+        <div class="col-sm-5">
+            <form id="form" method="post">
+                <div class="form-group">
+                    <div class="text-center"><h3>管理人员登录入口</h3></div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="账号" autofocus="" id="username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="密码" id="password">
+                </div>
+                <div class="form-group">
+                    <input type="captcha" class="form-control" name="captcha" placeholder="验证码" style="width: 50%; float: left; margin-top: 0px;" id="captcha">
+                    <img src="/captcha.html" alt="captcha" style="cursor: pointer; width: 100px; margin-top: 0px;margin-left: 10px;" onclick="this.src=this.src+'?'+Math.random()" id="captcha_img">
+                </div>
+                <button class="btn btn-success btn-block" id="sub" type="button">登录账号</button>
+                <br>
+                <span id="error" style="color: red;"></span>
+            </form>
+        </div>
+    </div>
+    <div class="signup-footer">
+        <div class="pull-left">
+            {$Think.config.system.copy}<a href="{$Think.config.system.domain}" target="_blank">&nbsp;&nbsp;{$Think.config.system.web_name}</a>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+        $('#sub').click(function () {
+            login();
+        });
+        $('#username, #password, #captcha').keyup(function (event) {
+            if (event.keyCode == 13) {
+                login();
+            }
+        });
+    })
+</script>
+<script>
+    function login() {
+        var data = $('#form').serialize();
+        var index = layer.load(1);
+        $.ajax({
+            type: "POST",
+            url: "{:url('/admin/login')}",
+            data: data,
+            //返回数据的格式
+            datatype: "json",
+            //成功返回之后调用的函数
+            success: function (data) {
+                layer.close(index);
+                if (data.success == true) {
+                    window.location.href = "{:url('admin/index/index')}";
+                } else {
+                    $('#captcha_img').click();
+                    $('#error').html(data.message)
+                }
+            },
+            //调用出错执行的函数
+            error: function () {
+                layer.close(index);
+                layer.alert('系统异常')
+                //请求出错处理
+            }
+        });
+    }
+</script>
+<script src="__static__/js/layer/layer.js"></script>
+</html>
