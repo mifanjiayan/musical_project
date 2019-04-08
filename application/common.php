@@ -604,3 +604,34 @@ function get_auto_new_order($ord = 0)
 }
 
 
+/**
+ * 后台json输出
+ * @param $success
+ * @param $message
+ * @param array $data
+ * @param int $code
+ * @param int $http_code
+ * @return \think\response\Json
+ */
+function rJson($success, $message, $data = [], $code = 0, $http_code = 200)
+{
+    if (empty($message)) {
+        $message = '未知信息';
+    }
+    if (empty($data)) {
+        $data = (object)[];
+    }
+
+    $result = [
+        'success' => $success,
+        'message' => $message,
+        'code' => $code,
+        'data' => $data,
+    ];
+
+    Log::debug('前台输出：' . json_encode($result));
+
+    return json($result, $http_code);
+}
+
+
