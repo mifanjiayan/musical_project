@@ -7,6 +7,7 @@
  */
 namespace app\common\controller;
 
+use app\common\library\Auth;
 use think\Db;
 use think\facade\Cache;
 use think\facade\Session;
@@ -27,22 +28,22 @@ class Admin extends BaseController
     public function initialize()
     {
         parent::initialize();
-//        //验证登录状态
-//        if (!$this->checkLogin()){
-//            $this->redirect('/admin/login');
-//        }
-//
-//        $this->auth = new Auth();
-//        $this->admin_info = get_admin_info();
-//        // 验证权限(排除id为1的系统管理员)
-//        if ($this->admin_info['id'] != 1 && !$this->checkRole()){
-//            if ($this->request->isAjax()){
-//                responseJson(false, -1, '权限不足！');
-//            }else{
-//                $this->error('权限不足！');
-//            }
-//        }
-//        $this->assign('system_config', $this->getSystemConfig());
+        //验证登录状态
+        if (!$this->checkLogin()){
+            $this->redirect('/admin/login');
+        }
+
+        $this->auth = new Auth();
+        $this->admin_info = get_admin_info();
+        // 验证权限(排除id为1的系统管理员)
+        if ($this->admin_info['id'] != 1 && !$this->checkRole()){
+            if ($this->request->isAjax()){
+                responseJson(false, -1, '权限不足！');
+            }else{
+                $this->error('权限不足！');
+            }
+        }
+        $this->assign('system_config', $this->getSystemConfig());
     }
 
     /**
@@ -116,10 +117,8 @@ class Admin extends BaseController
                 $permission = 'admin/'.$role.'/edit'; break;
             case 'admin/'.$role.'/update':
                 $permission = 'admin/'.$role.'/edit'; break;
-                break;
             case 'admin/'.$role.'/delete':
                 $permission = 'admin/'.$role.'/delete'; break;
-                break;
             default:
                 $permission = $routeName;
                 break;

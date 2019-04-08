@@ -3,51 +3,16 @@
     <div class="col-sm-3">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>交易量</h5>
+                <h5>流量访问</h5>
             </div>
             <div class="ibox-content">
-                <h1 class="no-margins" style="font-size: 1.6em">{$count.transaction.now} 元 / {$count.transaction.total} 元</h1>
+                <h1 class="no-margins" style="font-size: 1.6em">{$count.transaction.now}  / {$count.transaction.total} </h1>
                 <br/>
                 <small>今日 / 总计</small>
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>交易笔数</h5>
-            </div>
-            <div class="ibox-content">
-                <h1 class="no-margins" style="font-size: 1.6em">{$count.order_num.now} 笔 / {$count.order_num.now} 笔</h1>
-                <br/>
-                <small>今日 / 总计</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>商户充值</h5>
-            </div>
-            <div class="ibox-content">
-                <h1 class="no-margins" style="font-size: 1.6em">{$count.recharge.now} 元 / {$count.recharge.now} 元</h1>
-                <br/>
-                <small>今日 / 总计</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>商户手续费余额</h5>
-            </div>
-            <div class="ibox-content">
-                <h1 class="no-margins" style="font-size: 1.6em">0 元</h1>
-                <br/>
-                <small>总计</small>
-            </div>
-        </div>
-    </div>
+
 </div>
 <div class="row">
     <div class="col-sm-12">
@@ -101,7 +66,6 @@
                 var _data = data.data;
                 var Orderdata = {
                     column: _data.date,
-                    paydata: _data.total_fee,
                     createdata: _data.num,
                 };
                 console.log(Orderdata);
@@ -147,22 +111,8 @@
                     right: '40',
                     bottom: '50'
                 }],
-                series: [{
-                    name: '交易金额',
-                    type: 'line',
-                    smooth: true,
-                    areaStyle: {
-                        normal: {
-                        }
-                    },
-                    lineStyle: {
-                        normal: {
-                            width: 1.5
-                        }
-                    },
-                    data: Orderdata.paydata
-                }, {
-                    name: '交易笔数',
+                series: [ {
+                    name: '流量访问',
                     type: 'line',
                     smooth: true,
                     areaStyle: {
