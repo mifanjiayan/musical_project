@@ -41,8 +41,8 @@ class Index extends Admin
             'tid' => 0,
             'status' => 1
         ])->order('sort')->select();
-        $side_child = AdminSidebar::where('status',1)
-            ->where('tid','<>',0)
+        $side_child = AdminSidebar::where('status', 1)
+            ->where('tid', '<>', 0)
             ->order('sort')
             ->select();
         $list = [];
@@ -77,6 +77,11 @@ class Index extends Admin
      */
     private function getOrderCount()
     {
+        return array('date' => array(0 => '2019-03-26', 1 => '2019-03-27', 2 => '2019-03-28', 3 => '2019-03-29', 4 => '2019-03-30', 5 => '2019-03-31', 6 => '2019-04-01', 7 => '2019-04-02', 8 => '2019-04-03', 9 => '2019-04-04', 10 => '2019-04-05', 11 => '2019-04-06', 12 => '2019-04-07',), 'num' => array(0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 18, 9 => 0, 10 => 0, 11 => 0, 12 => 0,));
+        return $list = [
+            'date' => [],
+            'num' => [],
+        ];
         $end_time = strtotime(date('Y-m-d'));
         $star_time = $end_time - (3600 * 24 * 13);
 
@@ -91,7 +96,6 @@ WHERE UNIX_TIMESTAMP(a.date) >= ' . $star_time . ' AND UNIX_TIMESTAMP(a.date) <=
         $list = [
             'date' => [],
             'num' => [],
-            'total_fee' => []
         ];
 
         foreach ($calendar as $item) {
@@ -110,7 +114,6 @@ WHERE UNIX_TIMESTAMP(a.date) >= ' . $star_time . ' AND UNIX_TIMESTAMP(a.date) <=
             if ($total_fee > 0) {
                 $total = $total_fee;
             }
-            $list['total_fee'][] = $total;
         }
 
         return $list;
@@ -135,17 +138,18 @@ WHERE UNIX_TIMESTAMP(a.date) >= ' . $star_time . ' AND UNIX_TIMESTAMP(a.date) <=
 
         $data = [
             'transaction' => [
+                'now' => 10,
+                'total' => 1000,
+            ],
+        ];
+
+        return $data;
+
+        $data = [
+            'transaction' => [
                 'now' => Db::name('order')->where($now_where)->sum('total_fee'),
                 'total' => Db::name('order')->where($total_where)->sum('total_fee'),
             ],
-            'order_num' => [
-                'now' => Db::name('order')->where($now_where)->count(),
-                'total' => Db::name('order')->where($total_where)->count(),
-            ],
-            'recharge' => [
-                'now' => 0,//Db::name('merchant_recharge')->where($now_where)->count(),
-                'total' => 0,//Db::name('merchant_recharge')->where($total_where)->count(),
-            ]
         ];
 
         return $data;
@@ -166,11 +170,10 @@ WHERE UNIX_TIMESTAMP(a.date) >= ' . $star_time . ' AND UNIX_TIMESTAMP(a.date) <=
         $list = [
             'date' => [],
             'num' => [],
-            'total_fee' => []
         ];
         return view()->assign([
             'chart_data' => $list,
-            'count' => $this->getCount()
+            'count' => $this->getCount(),
         ]);
     }
 
@@ -183,7 +186,7 @@ WHERE UNIX_TIMESTAMP(a.date) >= ' . $star_time . ' AND UNIX_TIMESTAMP(a.date) <=
     public function updatePassword()
     {
         $admin_id = Session::get('admin_info')['id'];
-        Log::info('修改密码: '.$admin_id);
+        Log::info('修改密码: ' . $admin_id);
         $data = request()->post('password');
         if (empty($data)) return rJson(false, '请输入新密码！');
         $salt = rand_char();
