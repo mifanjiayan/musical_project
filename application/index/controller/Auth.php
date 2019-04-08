@@ -57,4 +57,21 @@ class  Auth extends BaseController
         }
         return view('admin_login');
     }
+
+    /**
+     * 后台管理退出
+     * @return \think\Response|\think\response\Json|\think\response\Jsonp|\think\response\Redirect|\think\response\View|\think\response\Xml
+     */
+    public function logout()
+    {
+        $type = $this->request->param('type', 'admin');
+        if ($type == 'admin') {
+            Session::delete('admin_info');
+            if (!Session::has('admin_info')) {
+                return responseJson(true, '退出成功！');
+            } else {
+                return responseJson(false, '退出失败！');
+            }
+        }
+    }
 }
