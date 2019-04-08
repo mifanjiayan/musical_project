@@ -1,72 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>{$Think.config.app.system.web_name}控制台</title>
-    <link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico" type="image/x-icon">
-    <link href="__admin__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <title>后台登录</title>
+    <link rel="shortcut icon" href="__admin__/admin.png" />
+    <link rel="shortcut icon" href="favicon.ico"> <link href="__admin__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="__admin__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="__admin__/css/animate.css" rel="stylesheet">
     <link href="__admin__/css/style.css?v=4.1.0" rel="stylesheet">
-    <link href="__admin__/css/login.css?v=4.1.0" rel="stylesheet">
     <script src="__admin__/js/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html"/>
-    <![endif]-->
-    <script>
-        if (window.top !== window.self) {
-            window.top.location = window.location;
+    <style>
+        .cls-content {
+            padding: 50px 15px 15px;
+            padding-top: 20vh;
+            position: relative;
+            color: #647484;
         }
-    </script>
-    <style type="text/css">
-        body.signin input {
-            color: #0a0c0d;
+        .bg-img ~ .cls-content .panel {
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
+        .cls-content .cls-content-sm {
+            width: 350px;
+        }
+        .cls-content .cls-content-sm, .cls-content .cls-content-lg {
+            /*width: 70%;*/
+            min-width: 270px;
+            margin: 0 auto;
+            position: relative;
+            background-color: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+        .panel {
+            border-radius: 0;
+            border: 1px solid #e7ecf3;
+            border-bottom: 1px solid rgba(0,0,0,0.17);
+            margin-bottom: 15px;
+        }
+        .panel {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        }
+        .cls-container, .cls-container a, .cls-container a:hover, .cls-container a:focus {
+            color: #647484;
+        }
+        .cls-container {
+            background-color: #ecf0f5;
+            text-align: center;
+        }
+        .panel .panel-footer, .panel>:last-child {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .panel .panel-heading, .panel>:first-child {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .panel-body {
+            padding: 15px 20px 25px;
+        }
+        .panel-body {
+            padding: 15px;
+        }
+        .text-lg {
+            font-size: 1.2em;
+        }
+        .text-main, a.text-main:hover, a.text-main:focus {
+            color: #2b425b;
+        }
+        .text-semibold {
+            font-weight: 600;
+        }
+        .bg-img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: .8;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
     </style>
 </head>
 
-<body class="signin">
-<div class="signinpanel">
-    <div class="row">
-        <div class="col-sm-7">
+<body class="gray-bg">
+<div id="container" class="" style="width: 350px; margin-left: auto; margin-right: auto;">
+    <div id="github_iframe" class="bg-img"></div>
+    <div class="cls-content">
+        <div class="cls-content-sm panel">
+            <div class="panel-body">
+                <form id="form" method="post">
+                    <div class="panel-body text-center">
+                        <img alt="Profile Picture" style="width: 100px;" class="img-lg img-circle mar-btm" src="/login.jpg">
+                        <br/>
+                        <br/>
+                        <p class="text-lg text-semibold mar-no text-main">后台登录</p>
+                        <p class="text-muted"></p>
+                        <p class="text-sm">请勿将您的账号密码告诉他人！ </p>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="管理员名" autofocus="" id="username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="管理员密码" id="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="captcha" class="form-control" name="captcha" placeholder="验证码" style="width: 50%; float: left" id="captcha"><img src="/captcha.html" alt="captcha" style="cursor: pointer; width: 160px" onclick="this.src=this.src+'?'+Math.random()" id="captcha_img">
+                    </div>
+                    <button class="btn btn-primary btn-block" id="sub" type="button">登录账号</button>
+                    <br>
+                    <span id="error" style="color: red;"></span>
+                </form>
+            </div>
 
-        </div>
-        <div class="col-sm-5">
-            <form id="form" method="post">
-                <div class="form-group">
-                    <div class="text-center"><h3>管理人员登录入口</h3></div>
-                </div>
-                <div class="hr-line-dashed"></div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="username" placeholder="账号" autofocus="" id="username">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="密码" id="password">
-                </div>
-                <div class="form-group">
-                    <input type="captcha" class="form-control" name="captcha" placeholder="验证码" style="width: 50%; float: left; margin-top: 0px;" id="captcha">
-                    <img src="/captcha.html" alt="captcha" style="cursor: pointer; width: 100px; margin-top: 0px;margin-left: 10px;" onclick="this.src=this.src+'?'+Math.random()" id="captcha_img">
-                </div>
-                <button class="btn btn-success btn-block" id="sub" type="button">登录账号</button>
-                <br>
-                <span id="error" style="color: red;"></span>
-            </form>
-        </div>
-    </div>
-    <div class="signup-footer">
-        <div class="pull-left">
-            {$Think.config.system.copy}<a href="{$Think.config.system.domain}" target="_blank">&nbsp;&nbsp;{$Think.config.system.web_name}</a>
+            <!--<div class="pad-all">-->
+            <!--</div>-->
         </div>
     </div>
 </div>
-</body>
+
+<!-- 全局js -->
+<script src="__admin__/js/bootstrap.min.js?v=3.3.6"></script>
+<script type="text/javascript" color="128,128,128" opacity='0.8' zIndex="-2" count="240" src="__static__/js/canvas-nest.js"></script>
 <script>
     $(function () {
         $('#sub').click(function () {
             login();
         });
-        $('#username, #password, #captcha').keyup(function (event) {
-            if (event.keyCode == 13) {
+        $('#username, #password, #captcha').keyup(function(event){
+            if(event.keyCode ==13){
                 login();
             }
         });
@@ -102,4 +179,5 @@
     }
 </script>
 <script src="__static__/js/layer/layer.js"></script>
+</body>
 </html>

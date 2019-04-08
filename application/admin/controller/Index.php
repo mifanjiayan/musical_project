@@ -15,8 +15,6 @@ class Index extends Admin
     public function index()
     {
         $sidebar = $this->getSidebar();
-//        halt($sidebar);
-        $group_title = '';
         if ($this->admin_info['id'] == 1) {
             $group_title = '超级管理员';
         } else {
@@ -56,7 +54,6 @@ class Index extends Admin
                     if ($this->admin_info['id'] == 1) {
                         $child[] = $_value;
                     } else {
-//                        dump($_value['url']);
 
                         if ($this->auth->check($_value['url'], $this->admin_info['id'])) {
                             $child[] = $_value;
